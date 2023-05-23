@@ -21,6 +21,8 @@ public interface PurchaseOrderRepository extends CrudRepository<purchaseOrder,In
     @Query("select * from  purchase_order where inv_date between ?1 and ?2")
     List<purchaseOrder> findByInvDateBetween( String invDatefrom, String invDateto);
     purchaseOrder findByInvNo(String invNo);
+   // List<purchaseOrder> findByInvNo(String invNo);
+   // purchaseOrder findByOrgCode(String orgCode);
     @Query("select * from  purchase_order where suplCode=?1 and inv_date=?2 and inv_type=?3")
     List<purchaseOrder> findBySuplCodeAndInvDateAndInvType(String suplCode, String date, String InvType);
 

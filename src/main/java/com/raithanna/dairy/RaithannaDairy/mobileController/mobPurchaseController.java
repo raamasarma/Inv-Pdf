@@ -249,7 +249,7 @@ public class mobPurchaseController {
     }
 
         Map body2 = new HashMap();
-        purchaseOrder po = purchaseOrderRepository.findByInvNo(invNumber);
+       purchaseOrder po = purchaseOrderRepository.findByInvNo(invNumber);
 
         body2.putIfAbsent("InvNum" , po.getInvNo());
         body2.putIfAbsent("date" , po.getInvDate());

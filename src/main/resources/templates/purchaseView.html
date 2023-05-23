@@ -154,11 +154,14 @@ table td { border: 3px solid black }
     <br>
     <div class="box-footer">
       <button id="submit" class="btn btn-primary">Submit</button>
+<!--      <button id="print"  class="btn btn-primary">Print</button>-->
+
     </div>
+
     <hr>
     <div id="hide">
       <div class="container">
-        <table class="css-serial" style="width:100%" id="purchaseTable" border=0>
+        <table class="table" style="width:100%" id="purchaseTable" border=0>
           <thead>
           <tr>
             <th scope="col">Invoice Date</th>
@@ -173,10 +176,8 @@ table td { border: 3px solid black }
             <th scope="col">Rate/Ltr</th>
             <th scope="col">Amount </th>
             <th scope="col">Pay Status</th>
-<!--            <th scope="col">Pay Status</th>-->
-            <th scope="col">Action</th>
-<!--            <th scope="col">Bank Name</th>-->
             <th scope="col">org Code</th>
+            <th scope="col">Action</th>
           </tr>
           </thead>
           <tbody>
@@ -216,7 +217,7 @@ var supplierName=$("#supplierName").val();
 var fromDate = $("#fromDate").val();
 //alert(fromDate);
 var toDate = $("#toDate").val();
-alert(toDate);
+//alert(toDate);
 $.ajax({
 'async': false,
  type: 'POST',
@@ -253,4 +254,35 @@ window.location.replace ("/purchaseExcel");
   window.location.href = "/viewInvoice?invoiceNo="+ invoiceCode+"&orgCode="+orgCode;
   });
 </script>
+<!--<script>-->
+<!--   $("#print").click(function() {-->
+<!--  // alert("in");-->
+<!--   var invoiceCode,orgCode;-->
+<!--    $("table trtd a.href").each(function(index) {-->
+<!--    var currentRow=$(this).closest("tr");-->
+<!--       invoiceNo = currentRow.find("td:eq(1)").text();;-->
+<!--      // alert(invoiceCode);-->
+<!--&lt;!&ndash;       alert("/purchasePdfData?invoiceNo="+invoiceCode);&ndash;&gt;-->
+<!--     var orgCode = $(this).parent().parent().find('td:nth-child(13)').text();-->
+<!--     //alert(orgCode);-->
+
+<!--       $.ajax({-->
+<!--&lt;!&ndash;'async': false,&ndash;&gt;-->
+<!-- type: 'POST',-->
+<!--url: '/viewInvoice',-->
+<!--        data: {-->
+<!--                "invoiceNo":invoiceNo,-->
+<!--                "orgCode ": orgCode ,-->
+
+<!--            },-->
+<!--            success: function(data) {-->
+<!--   //alert("Order Not Exists");-->
+<!--//alert("Data Saved Successfully !!!");-->
+<!--&lt;!&ndash;window.location.replace ("/purchaseExcel");&ndash;&gt;-->
+<!--window.location.href = "/viewInvoice?invoiceNo="+ invoiceNo;+"&orgCode="+orgCode;-->
+<!--}-->
+<!--});-->
+<!--  });-->
+<!--       });-->
+<!--</script>-->
 </html>

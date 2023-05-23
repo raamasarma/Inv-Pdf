@@ -114,7 +114,7 @@
             <label for="customer">Customer</label>
             <select id="customer" class="form-control" name="customerName">
                 <option th:each="i : ${customers}" th:value="${i.custName}"><span th:text="${i.custName}"></span> - <span
-                        th:text="${i.code}"></span></option>
+                        th:text="${i.custCode}"></span></option>
             </select>
         </div>
         <div class="col">
