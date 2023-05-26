@@ -29,7 +29,7 @@ public class saleOrder {
     @Column(updatable = false)
     private LocalDate createDate;
     private String shift;
-    private Integer orderNo;
+    private String orderNo;
 
     private Double disc;
     private double comm;

@@ -18,8 +18,7 @@ public class supplierController {
     private String supplierForm(Model model){
         supplier su=new supplier();
         model.addAttribute("supplier",su);
-        return "supplier";
-    }
+      }
     @PostMapping("/supplier")
     public String saveSupplier(Model model,supplier sr){
         String supName = sr.getSupplierName();

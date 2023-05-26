@@ -49,9 +49,18 @@ public class mobSaleController {
             Product.add(p.getPCode());
             Products.add(Product);
         }
+        saleOrder saleOrder = saleOrderRepository.findTopByOrderByOrderNoDesc();
+        Integer orderNo;
+        if (saleOrder == null) {
+            orderNo = Integer.valueOf(String.valueOf(1));
+            System.out.println(orderNo);
+        } else {
+            orderNo = Integer.valueOf(saleOrder.getOrderNo()) + 1;
+        }
         LocalDate date = LocalDate.parse(body.get("date").toString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         body2.putIfAbsent("customers", Customers);
         body2.putIfAbsent("Products", Products);
+        body2.putIfAbsent("orderNo", orderNo);
         return ResponseEntity.status(202).body(body2);
     }
     @PostMapping(value = "/saleOrderMob", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
@@ -59,18 +68,26 @@ public class mobSaleController {
         System.out.println("1111111111111111111111");
         System.out.println(body);
         dailySales ds=new dailySales();
-        ds.setAmount(Double.valueOf(body.get("amount")));
-        ds.setNetAmount(Double.valueOf(body.get("netAmount")));
-        ds.setUnitRate(Double.valueOf(body.get("unitRate")));
-        ds.setQuantity(Double.valueOf(body.get("quantity")));
-        ds.setDisc(Double.valueOf(body.get("disc")));
-        ds.setDate(LocalDate.parse(body.get("date")));
-        ds.setCreationDate(LocalDate.parse(body.get("creationDate")));
-        ds.setName(body.get("name"));
+        ds.setDate(String.valueOf(((body.get("date")))));
+        ds.setOrderNo(String.valueOf((body.get("orderNo"))));
         ds.setProdCode(body.get("prodCode"));
+        ds.setCustCode(body.get("custCode"));
+        ds.setDisc(Double.valueOf(body.get("disc")));
+        ds.setNetAmount(Double.valueOf(body.get("netAmount")));
+        ds.setAmount(Double.valueOf(body.get("amount")));
+        ds.setQuantity(Double.valueOf(body.get("quantity")));
+        ds.setUnitRate(Double.valueOf(body.get("unitRate")));
+
+
+
+
+       // ds.setCreationDate(LocalDate.parse(body.get("creationDate")));
+       // ds.setName(body.get("name"));
+       // ds.setProdCode(body.get("prodCode"));
         dailySlaesRepository.save(ds);
 
         saleOrder so=new saleOrder();
+        so.setOrderNo(body.get("orderNo"));
         so.setName(body.get("name"));
         so.setUnitRate(Double.parseDouble(body.get("unitRate")));
         saleOrderRepository.save(so);
@@ -84,4 +101,19 @@ public class mobSaleController {
 
 
     }
+    @PostMapping(value = "/saleMobile", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<String> registerMob(Model model, @RequestBody dailySales sales, HttpServletRequest request, HttpSession session) {
+        List<String> messages = new ArrayList<>();
+        System.out.println(sales);
+        try {
+          dailySlaesRepository.save(sales);
+            return ResponseEntity.status(202).body("Successfully Created(CODE 202)\n");
+        } catch (Exception handlerException) {
+            model.addAttribute("messages", messages);
+            return ResponseEntity.status(203).body("Error Creating your Account pls retry (CODE 203)\n");
+        }
+
+    }
 }
+// try figuring out how to solve the date error i am done with frontend work and disconnecting
+//ok

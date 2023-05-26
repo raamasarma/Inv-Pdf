@@ -7,16 +7,17 @@
     <list default="true" id="eead94d3-5cc6-4c28-857f-0505dfa752f4" name="Changes" comment="Current Working merged ver">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/spring-boot-logger.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/spring-boot-logger.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/mobileController/mobPurchaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/mobileController/mobPurchaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/repositories/PurchaseOrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/repositories/PurchaseOrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/controller/orderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/controller/orderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/controller/supplierController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/controller/supplierController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/models/dailySales.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/models/dailySales.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/models/saleOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/models/saleOrder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/createOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/createOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/purchaseView.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/purchaseView.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/purchasepdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/purchasepdf.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/createOrder.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/createOrder.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/purchaseView.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/purchaseView.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/templates/purchasepdf.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/purchasepdf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/controller/orderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/controller/orderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/models/dailySales.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/models/dailySales.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/models/saleOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/models/saleOrder.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

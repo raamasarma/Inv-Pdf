@@ -43,7 +43,7 @@ public class orderController {
             if (saleOrder == null) {
                 orderNo = 1;
             } else {
-                orderNo = saleOrder.getOrderNo() + 1;
+                orderNo = Integer.valueOf(saleOrder.getOrderNo() + 1);
             }
             // all customer list
             List<customer> Customers = customerRepository.findByOrderByIdDesc();
@@ -93,7 +93,7 @@ public class orderController {
         System.out.println(orderDetails);
         try {
             // daily sales table save
-            order.setOrderNo(Integer.parseInt(orderDetails.get("orderDetails[orderNo]")));
+            order.setOrderNo(String.valueOf(orderDetails.get("orderDetails[orderNo]")));
             order.setCustCode(orderDetails.get("orderDetails[custCode]"));
             order.setName(orderDetails.get("orderDetails[Name]"));
             order.setDisc(Double.parseDouble(orderDetails.get("orderDetails[disc]")));
@@ -138,7 +138,7 @@ public class orderController {
             System.out.println("netamt" + netamt);
         }
         saleOrder saleorder = new saleOrder();
-        saleorder.setOrderNo(Integer.parseInt(orderNo));
+        saleorder.setOrderNo(String.valueOf(orderNo));
         saleorder.setAmount(amt);
         saleorder.setNetAmount(netamt);
         saleorder.setDisc(amt - netamt);
@@ -259,7 +259,7 @@ public class orderController {
                 ds.setUnitRate(list.getUnitRate());
                 dailySalesRepository.save(ds);
             }
-            saleOrder so = saleOrderRepository.findByOrderNo(orderList.get(0).getOrderNo());
+            saleOrder so = saleOrderRepository.findByOrderNo(Integer.valueOf(orderList.get(0).getOrderNo()));
             so.setDisc(orderList.get(0).getTotDisc());
             so.setAmount(orderList.get(0).getTotAmount());
             so.setNetAmount(orderList.get(0).getTotNetAmount());
@@ -333,12 +333,12 @@ public class orderController {
             saleOrder so = new saleOrder();
             //so.setCustCode(orderList.get(0).getCustCode());
             so.setCustCode(orderList.get(0).getCustCode());
-            so.setOrderNo(orderList.get(0).getOrderNo());
+            so.setOrderNo(String.valueOf(Integer.valueOf(String.valueOf(orderList.get(0).getOrderNo()))));
             Double d = totalAmount - totalNetAmount;
             so.setDisc(d);
             so.setAmount(totalAmount);
             so.setNetAmount(totalNetAmount);
-            so.setDate(orderList.get(0).getDate());
+            so.setDate(LocalDate.parse((orderList.get(0).getDate())));
             so.setName(orderList.get(0).getName());
             saleOrderRepository.save(so);
             return new ModelAndView("/loginPage");

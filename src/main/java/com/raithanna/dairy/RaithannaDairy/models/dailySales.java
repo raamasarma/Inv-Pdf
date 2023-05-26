@@ -23,14 +23,14 @@ public class dailySales {
     @GeneratedValue
     private Integer id;
     private String name;
-    private LocalDate date;
+    private String date;
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDate creationDate;
     @UpdateTimestamp
     @Column(insertable = false)
     private LocalDateTime recDate;
-    private Integer orderNo;
+    private String orderNo;
     private String prodCode;
     private String custCode;
     private Double disc;
