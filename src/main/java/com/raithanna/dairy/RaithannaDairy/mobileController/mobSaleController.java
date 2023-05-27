@@ -57,6 +57,8 @@ public class mobSaleController {
         } else {
             orderNo = Integer.valueOf(saleOrder.getOrderNo()) + 1;
         }
+//      saleOrder sale=  saleOrderRepository.findByCustCode(body.get("custCode"));
+//        System.out.println("sale:"+sale);
         LocalDate date = LocalDate.parse(body.get("date").toString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         body2.putIfAbsent("customers", Customers);
         body2.putIfAbsent("Products", Products);
@@ -90,6 +92,7 @@ public class mobSaleController {
         so.setOrderNo(body.get("orderNo"));
         so.setName(body.get("name"));
         so.setUnitRate(Double.parseDouble(body.get("unitRate")));
+        so.setCustCode(body.get("custCode"));
         saleOrderRepository.save(so);
 
 

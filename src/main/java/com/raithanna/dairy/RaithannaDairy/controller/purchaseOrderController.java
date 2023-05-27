@@ -51,21 +51,12 @@ public class purchaseOrderController {
             //List<purchaseOrder> Amts = purchaseOrderRepository.findByOrderByAmtDesc();
             List<bank> bank = bankRepository.findByOrderByIdDesc();
             List<vehicle> vehicle =vehicleRepository.findByOrderByIdDesc();
-//            purchaseOrder purchaseOrder = purchaseOrderRepository.findTopByOrderByOrderNoDesc();
-//            Integer orderNo;
-//            if (purchaseOrder==null) {
-//                orderNo = 1;
-//            } else {
-//                orderNo = purchaseOrder.getOrderNo() + 1;
-//            }
             System.out.println(Suppliers.size());
             purchaseOrder po = new purchaseOrder();
             model.addAttribute("purchase", po);
             model.addAttribute("supplier", Suppliers);
-           // model.addAttribute("amt", Amts);
             model.addAttribute("bank", bank);
             model.addAttribute("vehicle", vehicle);
-          //  model.addAttribute("orderNo", orderNo);
             return "purchase";
         }
         List messages = new ArrayList<>();
@@ -85,8 +76,7 @@ public class purchaseOrderController {
        String suplCode =po.getSuplCode();
        System.out.println(suplCode);
        System.out.println(OrgCode);
-      Double ttlamt= po.getTotAmtRound();
-
+       Double ttlamt= po.getTotAmtRound();
        String words = numtoWords.convert(ttlamt.toString().split("\\.")[0]);
        supplier sm= supplierRepository.findBySupplierCode(suplCode);
        System.out.println("sm:"+sm);

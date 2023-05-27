@@ -10,9 +10,12 @@ import org.springframework.data.repository.CrudRepository;
 public interface SaleOrderRepository extends CrudRepository<saleOrder, Integer> {
     @Query("select * from sale_order where orderNo=?1")
     public saleOrder findByOrderNo(String orderNo);
-
+    @Query("select * from sale_order where custCode=?1")
+    public saleOrder findByCustCode(String custCode);
     @Query("select * from sale_order where id=?1")
     saleOrder findByid(Integer id);
 
     saleOrder findTopByOrderByOrderNoDesc();
+
+   // void findByCustCode(String custCode);
 }
