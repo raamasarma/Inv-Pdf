@@ -24,7 +24,7 @@
   padding:3px;
   background-colour:#fff;
   }
-  input#name{
+  input#custName{
   width:300px;
   border:1px solid blue;
   border-radius:2px
@@ -95,7 +95,7 @@
         <div class="col">
             <label for="customer">Customer</label>
             <select id="customer" class="form-control" name="customer">
-                <option th:each="i : ${customers}" th:value="${i.code}"><span th:text="${i.custName}"></span> - <span th:text="${i.code}"></span></option>
+                <option th:each="i : ${customers}" th:value="${i.custCode}"><span th:text="${i.custName}"></span> - <span th:text="${i.custCode}"></span></option>
             </select>
             <br>
             <button id="get" class="btn btn-primary">Get</button>
@@ -122,9 +122,9 @@
             $.ajax({
                 type : 'POST',
                 url : '/getCustValues',
-                data : {"code":$("#customer").val()},
+                data : {"custCode":$("#customer").val()},
                 success: function(data) {
-                    $("#name").val(data["name"]);
+                    $("#name").val(data["custName"]);
                     $("#phone").val(data["phoneNumber"]);
                     $("#email").val(data["Email"]);
                 }
@@ -136,8 +136,8 @@
                 type : 'POST',
                 url : '/customerEdit',
                 data : {
-                    "code":$("#customer").val(),
-                    "name":$("#name").val(),
+                    "custCode":$("#customer").val(),
+                    "custName":$("#name").val(),
                     "phone":$("#phone").val(),
                     "email":$("#email").val(),
                 },

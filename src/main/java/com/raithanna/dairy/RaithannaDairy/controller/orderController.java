@@ -43,7 +43,7 @@ public class orderController {
             if (saleOrder == null) {
                 orderNo = 1;
             } else {
-                orderNo = Integer.valueOf(saleOrder.getOrderNo() + 1);
+                orderNo = Integer.valueOf(saleOrder.getOrderNo()) + 1;
             }
             // all customer list
             List<customer> Customers = customerRepository.findByOrderByIdDesc();
@@ -115,10 +115,10 @@ public class orderController {
     @PostMapping("/createSaleOrder")
     public String createSaleOrder(@RequestParam String orderNo) {
         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + orderNo);
-        List<dailySales> orderProducts = dailySalesRepository.findByOrderNo(Integer.parseInt(orderNo));
+        List<dailySales> orderProducts = dailySalesRepository.findByOrderNo(String.valueOf(Integer.parseInt(orderNo)));
         while (true) {
             if (orderProducts.isEmpty()) {
-                orderProducts = dailySalesRepository.findByOrderNo(Integer.parseInt(orderNo));
+                orderProducts = dailySalesRepository.findByOrderNo(String.valueOf(Integer.parseInt(orderNo)));
             } else {
                 break;
             }
@@ -152,8 +152,8 @@ public class orderController {
     //Get Order Start
     @GetMapping("/getOrder")
     public String getOrder(@RequestParam(name = "orderNo", defaultValue = "1") Integer orderNo, Model model) {
-        List<dailySales> orderProducts = dailySalesRepository.findByOrderNo(orderNo);
-        saleOrder sale_order = saleOrderRepository.findByOrderNo(orderNo);
+        List<dailySales> orderProducts = dailySalesRepository.findByOrderNo(String.valueOf(orderNo));
+        saleOrder sale_order = saleOrderRepository.findByOrderNo(String.valueOf(orderNo));
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = sale_order.getDate().format(dateTimeFormatter);
         sale_order.setRemarks(formattedDate);
@@ -191,7 +191,7 @@ public class orderController {
         if (session.getAttribute("loggedIn").equals("yes")) {
             List<customer> Customers = customerRepository.findByOrderByIdDesc();
             // order - product details
-            List<dailySales> orderedProducts = dailySalesRepository.findByOrderNo(orderNo);
+            List<dailySales> orderedProducts = dailySalesRepository.findByOrderNo(String.valueOf(orderNo));
             if (orderedProducts.size() > 0) {
                 System.out.println("total ordered products count --" + orderedProducts.size());
                 // all - product details
@@ -212,7 +212,7 @@ public class orderController {
                     }
                 }
                 System.out.println("total products after deletion --" + products1.size());
-                saleOrder sales = saleOrderRepository.findByOrderNo(orderNo);
+                saleOrder sales = saleOrderRepository.findByOrderNo(String.valueOf(orderNo));
                 NumberFormat formatter = new DecimalFormat("##.00");
                 String amount = formatter.format(sales.getAmount()).toString();
                 String disc = formatter.format(sales.getDisc()).toString();
@@ -259,7 +259,7 @@ public class orderController {
                 ds.setUnitRate(list.getUnitRate());
                 dailySalesRepository.save(ds);
             }
-            saleOrder so = saleOrderRepository.findByOrderNo(Integer.valueOf(orderList.get(0).getOrderNo()));
+            saleOrder so = saleOrderRepository.findByOrderNo(String.valueOf(orderList.get(0).getOrderNo()));
             so.setDisc(orderList.get(0).getTotDisc());
             so.setAmount(orderList.get(0).getTotAmount());
             so.setNetAmount(orderList.get(0).getTotNetAmount());
@@ -278,7 +278,7 @@ public class orderController {
     public String checkOrder(Model model, HttpSession session, HttpServletRequest request) throws JsonProcessingException {
         String orderNo = request.getParameter("orderNo1");
         System.out.println("order Number ---- $$$ ---" + orderNo);
-        List<dailySales> orderedProducts = dailySalesRepository.findByOrderNo(Integer.parseInt(orderNo));
+        List<dailySales> orderedProducts = dailySalesRepository.findByOrderNo(String.valueOf(orderNo));
         String result = "";
         if (orderedProducts.size() > 0) {
             result = "true";

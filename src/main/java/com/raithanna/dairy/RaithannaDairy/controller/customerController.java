@@ -113,7 +113,7 @@ public class customerController {
     public ResponseEntity<?> getCustValues(@RequestParam Map<String, String> body) {
         Map<String, String> respBody = new HashMap<>();
         System.out.println(body);
-        customer Customer = customerRepository.findByCustCode(body.get("code"));
+        customer Customer = customerRepository.findByCustCode(body.get("custCode"));
         respBody.putIfAbsent("custName", Customer.getCustName());
         respBody.putIfAbsent("phoneNumber", Customer.getMobileNo());
         respBody.putIfAbsent("Email", Customer.getEmail());
@@ -124,7 +124,7 @@ public class customerController {
     public ResponseEntity<?> customerEdit(@RequestParam Map<String, String> body) {
         Map<String, String> respBody = new HashMap<>();
         System.out.println(body);
-        customer Customer = customerRepository.findByCustCode(body.get("code"));
+        customer Customer = customerRepository.findByCustCode(body.get("custCode"));
         Customer.setCustName(body.get("custName"));
         Customer.setMobileNo(body.get("phone"));
         Customer.setEmail(body.get("email"));
