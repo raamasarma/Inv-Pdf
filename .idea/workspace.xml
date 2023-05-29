@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eead94d3-5cc6-4c28-857f-0505dfa752f4" name="Changes" comment="Current Working merged ver">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/spring-boot-logger.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/spring-boot-logger.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/controller/purchaseOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/controller/purchaseOrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/repositories/SaleOrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/raithanna/dairy/RaithannaDairy/repositories/SaleOrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/repositories/SaleOrderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/repositories/SaleOrderRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/vehicle.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/vehicle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/raithanna/dairy/RaithannaDairy/mobileController/mobSaleController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/vehicle.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/vehicle.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -85,11 +85,11 @@ input#vehicleNo{
         <label>Chasis Number</label>
         <input   type="text"  id="chasisNumber"  th:field="*{chasisNumber}"  class="form-control"/>
       </div>
-      <div class="col">
+      <div class="col-2">
         <label>Owner</label>
         <input   type="text"  id="owner"  th:field="*{owner}"  class="form-control"/>
       </div>
-      <div class="col">
+      <div class="col-1">
         <label for=" capacity">Capacity</label>
         <select id=" capacity" class="form-control" name=" capacity" >
           <option value="9kl">9Kl</option>
@@ -97,13 +97,18 @@ input#vehicleNo{
           <option value="20kl">20Kl</option>
         </select>
       </div>
-      <div class="col">
+      <div class="col-1">
         <label for="compartments">Campartments</label>
         <select id="compartments" class="form-control" name="compartments" >
           <option value="1">1</option>
           <option value="2">2</option>
         </select>
       </div>
+        <div class="col">
+            <label>suplAttached</label>
+            <input   type="text"  id="suplAttached"  th:field="*{suplAttached}"  class="form-control"/>
+        </div>
+
     </div>
     <div class="row auto-align">
 

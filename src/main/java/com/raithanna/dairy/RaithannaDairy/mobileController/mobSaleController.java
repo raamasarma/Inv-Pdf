@@ -33,7 +33,7 @@ public class mobSaleController {
 
     @PostMapping(value = "/getOrderDetails", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Map> getOrderDetails(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session) {
-        System.out.println(body);
+        System.out.println("body:"+body);
         Map body2 = new HashMap();
         List Customers = new ArrayList<>();
         for (customer n :customerRepository.findAll()){
@@ -118,5 +118,3 @@ public class mobSaleController {
 
     }
 }
-// try figuring out how to solve the date error i am done with frontend work and disconnecting
-//ok
