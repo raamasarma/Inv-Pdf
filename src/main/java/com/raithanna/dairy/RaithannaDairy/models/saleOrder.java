@@ -24,7 +24,7 @@ public class saleOrder {
     private String branch;
     private String custCode;
     private String name;
-    private LocalDate date;
+    private String date;
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDate createDate;

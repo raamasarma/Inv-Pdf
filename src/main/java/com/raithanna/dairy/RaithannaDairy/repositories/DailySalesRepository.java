@@ -2,6 +2,7 @@ package com.raithanna.dairy.RaithannaDairy.repositories;
 
 import com.azure.spring.data.cosmos.repository.Query;
 import com.raithanna.dairy.RaithannaDairy.models.dailySales;
+import com.raithanna.dairy.RaithannaDairy.models.saleOrder;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,8 +11,9 @@ import java.util.List;
 @Repository
 public interface DailySalesRepository extends CrudRepository<dailySales, Integer> {
     @Query("select * from daily_sales where order_no=?1")
-    List<dailySales> findByOrderNo(String orderNo);
-
+   // List<dailySales> findByOrderNo(String orderNo);
+    dailySales findByOrderNo(String orderNo);
+   // List<dailySales> findByDate(String date);
     @Query("select * from daily_sales where id=?1")
     dailySales findByid(Integer id);
     //@Modifying
