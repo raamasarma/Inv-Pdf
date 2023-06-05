@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,7 +35,7 @@ public class mobSaleController {
 
     @PostMapping(value = "/getOrderDetails", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Map> getOrderDetails(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session) {
-        System.out.println("body:" + body);
+        System.out.println("body1:" + body);
         Map body2 = new HashMap();
         List Customers = new ArrayList<>();
         for (customer n : customerRepository.findAll()) {
@@ -58,8 +59,6 @@ public class mobSaleController {
         } else {
             orderNo = Integer.valueOf(saleOrder.getOrderNo()) + 1;
         }
-//      saleOrder sale=  saleOrderRepository.findByCustCode(body.get("custCode"));
-//        System.out.println("sale:"+sale);
         LocalDate date = LocalDate.parse(body.get("date").toString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         body2.putIfAbsent("customers", Customers);
         body2.putIfAbsent("Products", Products);
@@ -70,8 +69,11 @@ public class mobSaleController {
     @PostMapping(value = "/saleOrderMob", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Map> saveSales(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session) {
         System.out.println("1111111111111111111111");
-        System.out.println(body);
+        System.out.println("body2:"+body);
         dailySales ds = new dailySales();
+        LocalDate date1 = LocalDate.parse(body.get("date").toString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+
+        System.out.println("date:"+date1);
         ds.setDate(String.valueOf(((body.get("date")))));
         ds.setOrderNo(String.valueOf((body.get("orderNo"))));
         ds.setProdCode(body.get("prodCode"));
@@ -125,19 +127,25 @@ public class mobSaleController {
     @PostMapping(value = "/getSales", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<Map> getSales(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session) {
         System.out.println("333333333333333333333333");
-        System.out.println("body:"+body);
+        System.out.println("body3:"+body);
         Map body2 = new HashMap();
         List orderNumbers = new ArrayList();
         String date = body.get("date").toString();
         System.out.println("4444444444444444444444444444444");
         System.out.println("date:"+date);
-
+        // check date format n all
+        //orderno is not getting
+        // adhe date format check cheyyi
+        // am going out d
+        //one doubt for kalyan
+        //small it is from morning it is not getting
+        //pls connect to kalyan
        for(saleOrder order :saleOrderRepository.findByDate(body.get("date").toString())) {
 
 
-           System.out.println("custCode:" + order.getOrderNo());
+           System.out.println("orderNo:" + order.getOrderNo());
 
-           orderNumbers.add(order.getCustCode());
+           orderNumbers.add(order.getOrderNo());
 
        }
 
@@ -147,7 +155,7 @@ public class mobSaleController {
 
         @PostMapping(value = "/getSO", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
         public ResponseEntity<Map> getPO(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session ){
-          System.out.println(body);
+          System.out.println("body4:"+body);
         String orderNo = body.get("orderNo");
         if (orderNo.equals("null")) {
             return ResponseEntity.status(202).body(new HashMap<>());
@@ -168,7 +176,7 @@ public class mobSaleController {
     public ResponseEntity<Map> updateSales(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session) {
 
         System.out.println("update");
-        System.out.println(body);
+        System.out.println("body5:"+body);
         dailySales ds= dailySlaesRepository.findByOrderNo(body.get("orderNo"));
         ds.setDate((body.get("date")));
         ds.setCustCode(body.get("custCode"));
