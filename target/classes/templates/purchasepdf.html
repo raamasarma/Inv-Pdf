@@ -147,9 +147,7 @@
 <hr style="height: 3px; width: 100%; background-color: blue; border-radius: 2.5px;">
 </hr>
 <div class="row" style=" display: flex; justify-content: space-between; width: 100%;">
-  <div class="col-auto" style="text-align: start; ">
-    <p>PAN NO : AQXPA6394G</p>
-  </div>
+
 </div>
 <h3 style="text-align: center;">ORIGINAL FOR RECEPIENT</h3>
 <h2 style="text-align: center;">TAX INVOICE</h2>
@@ -203,6 +201,7 @@
   <thead>
   <tr>
     <th>Sno</th>
+    <th>Description</th>
     <th>Fat</th>
     <th>SNF</th>
     <th>Qty</th>
@@ -212,28 +211,26 @@
   </tr>
   </thead>
   <tbody>
-  <tr th:each="por:${po}">
-    <td></td>
-    <td>
-      <span th:text="${por.fatP}"></span>
-    </td>
-    <td>
-      <span th:text="${por.snfP}"></span>
-    </td>
-    <td>Ltrs: <span th:text="${por.quantity}"></span>
-    </td>
-    <td>
-      <span th:text="${por.unit}"></span>
-    </td>
-    <td>Rs <span th:text="${por.ltrRate}"></span>/- </td>
-    <td>Rs <span th:text="${por.amt}"></span>/- </td>
-  </tr>
+  <th:block th:each="por : ${po1}">
+    <tr>
+      <td></td>
+      <td>Raw Chilled Cow Milk: <br></br>
+        Rate : <span th:text="${por.tsRate}"></span> LtrTs
+      </td>
+      <td th:text="${por.fatP}">...</td>
+      <td th:text="${por.snfP}">...</td>
+      <td th:text="${por.quantity}">...</td>
+      <td> KG</td>
+      <td th:text="${por.ltrRate}">...</td>
+      <td th:text="${por.amt}">...</td>
+    </tr>
+  </th:block>
   </tbody>
   <tfoot>
   <tr>
     <td colspan="7">Total</td>
     <td>
-      <span th:text="${oc.totAmtRound}"></span>
+      <span th:text="${po.totAmtRound}"></span>
     </td>
   </tr>
   </tfoot>
@@ -245,7 +242,7 @@
     </b> only </td>
     <td>
       <b>Sub Total</b> : Round Off <br></br>
-      <b>Bill Total : <span th:text="${oc.totAmtRound}"></span>
+      <b>Bill Total : <span th:text="${po.totAmtRound}"></span>
       </b>
     </td>
   </tr>

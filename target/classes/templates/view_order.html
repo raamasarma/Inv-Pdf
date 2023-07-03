@@ -78,6 +78,9 @@ table td { border: 3px solid black}
    background-color: blue;
    text-align: center;
 }
+
+
+
     </style>
 </head>
 <body style="background-color:#fff;">
@@ -183,6 +186,9 @@ $(document).ready(function() {
         }
     })
 
+
+
+
 </script>
 <script>
   // ajax call update for table
@@ -241,29 +247,32 @@ setTimeout(function(){ $messageDiv.hide().html('');}, 5000); // 3 seconds later,
 });
 });
 
+
+
+
 </script>
 <script>
-$('table tbody tr').keyup(function() {
+   $('table tbody tr').keyup(function() {
  // current row picker
- var currentRow=$(this).closest("tr");
- var $row = $(this).closest('tr');
- var product=currentRow.find("td:eq(0)").text();
- var qty = parseFloat(currentRow.find('#qty').val());
- var unitRate=currentRow.find("td:eq(3)").text();
- //alert(qty*parseFloat(unitRate));
- var calAmount = qty*parseFloat(unitRate);
- var discount=currentRow.find("td:eq(4)").text();
- //$currentRow.find('td').eq(4).text(qty*parseFloat(unitRate));
- // set calculated value
- $row.find('td').eq(5).text(calAmount);
-var discount = parseFloat(currentRow.find('#disc').val());
-var netAmount = calAmount - parseFloat(discount) * parseFloat(qty);
- $row.find('td').eq(6).text(netAmount);
-  var discount,amt =0,netamt=0;
-  $("table tbody tr").each(function(index) {
-  var currentRow=$(this).closest("tr");
-   var amount=parseFloat(currentRow.find("td:eq(5)").text());
-   var netamount=parseFloat(currentRow.find("td:eq(6)").text());
+   var currentRow=$(this).closest("tr");
+   var $row = $(this).closest('tr');
+   var product=currentRow.find("td:eq(0)").text();
+    var qty = parseFloat(currentRow.find('#qty').val());
+    var unitRate=currentRow.find("td:eq(3)").text();
+    //alert(qty*parseFloat(unitRate));
+     var calAmount = qty*parseFloat(unitRate);
+     var discount=currentRow.find("td:eq(4)").text();
+      //$currentRow.find('td').eq(4).text(qty*parseFloat(unitRate));
+     // set calculated value
+      $row.find('td').eq(5).text(calAmount);
+   var discount = parseFloat(currentRow.find('#disc').val());
+    var netAmount = calAmount - parseFloat(discount) * parseFloat(qty);
+     $row.find('td').eq(6).text(netAmount);
+     var discount,amt =0,netamt=0;
+     $("table tbody tr").each(function(index) {
+    var currentRow=$(this).closest("tr");
+     var amount=parseFloat(currentRow.find("td:eq(5)").text());
+     var netamount=parseFloat(currentRow.find("td:eq(6)").text());
          amt = amt+amount;
          netamt=netamt+netamount;
            });
@@ -272,21 +281,21 @@ var netAmount = calAmount - parseFloat(discount) * parseFloat(qty);
     $("#totAmount").html(amt);
     $("#totNetAmount").html(netamt);
 });
-$('table tbody tr').change(function() {
- var index = this.rowIndex;
- var currentRow=$(this).closest("tr");
- var $row = $(this).closest('tr');
-//var product = currentRow.find('#product').val();
-var qty = parseFloat(currentRow.find('#qty').val());
-var discount = parseFloat(currentRow.find('#disc').val());
- //alert($("#product option:selected").text());
-var selectedValue = currentRow.find("#product option:selected").text();
-var fields = selectedValue.split(' - ');
-var product = fields[0];
-var unitRate = fields[1];
-  var amount, netAmount;
-  var discount,amt =0,netamt=0;
-  $.ajax({
+  $('table tbody tr').change(function() {
+    var index = this.rowIndex;
+     var currentRow=$(this).closest("tr");
+     var $row = $(this).closest('tr');
+    //var product = currentRow.find('#product').val();
+    var qty = parseFloat(currentRow.find('#qty').val());
+    var discount = parseFloat(currentRow.find('#disc').val());
+    //alert($("#product option:selected").text());
+    var selectedValue = currentRow.find("#product option:selected").text();
+    var fields = selectedValue.split(' - ');
+    var product = fields[0];
+    var unitRate = fields[1];
+     var amount, netAmount;
+    var discount,amt =0,netamt=0;
+     $.ajax({
           'async': false,
             type: 'POST',
             url: '/getproductValues',
@@ -296,28 +305,33 @@ var unitRate = fields[1];
                 "disc": discount,
                 "unitRate" :unitRate
             },
-            success: function(data) {
+            success: function(data)
 
-       unitRate = data["commonValue"];
-            amount = qty * unitRate;
-          netAmount = (unitRate - discount) * qty;
-          }
-});
-$(this).find('#unitRate').html(unitRate);
-  $(this).find('#amount').html(amount);
-   $(this).find('#netAmount').html(netAmount);
-   var discount,amt =0,netamt=0;
-  $("table tbody tr").each(function(index) {
-  var currentRow=$(this).closest("tr");
-   var amount=parseFloat(currentRow.find("td:eq(5)").text());
-   var netamount=parseFloat(currentRow.find("td:eq(6)").text());
+            {
+
+               unitRate = data["commonValue"];
+               amount = qty * unitRate;
+              netAmount = (unitRate - discount) * qty;
+            }
+    });
+          $(this).find('#unitRate').html(unitRate);
+     $(this).find('#amount').html(amount);
+      $(this).find('#netAmount').html(netAmount);
+     var discount,amt =0,netamt=0;
+    $("table tbody tr").each(function(index) {
+     var currentRow=$(this).closest("tr");
+     var amount=parseFloat(currentRow.find("td:eq(5)").text());
+      var netamount=parseFloat(currentRow.find("td:eq(6)").text());
          amt = amt+amount;
          netamt=netamt+netamount;
            });
-discount = amt-netamt;
-    $("#totDiscount").html(discount);
-    $("#totAmount").html(amt);
-    $("#totNetAmount").html(netamt);
+       discount = amt-netamt;
+        $("#totDiscount").html(discount);
+        $("#totAmount").html(amt);
+         $("#totNetAmount").html(netamt);
 });
+
+
+
 </script>
 </html>

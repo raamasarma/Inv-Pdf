@@ -24,6 +24,7 @@ public class purchaseOrder {
     private String invDate;
   // private Integer orderNo;/// found redundant - need to remove- as this is part of invno
     private String invNo;//VA-120523-001/01 S1-260423-001/2
+    private  String orderNo;
     private String supplier;//need to remove
     private String suplCode;//supplier.suppliercode
     private String vehNumber;//vehicle.vehicleNo

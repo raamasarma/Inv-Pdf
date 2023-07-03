@@ -51,23 +51,25 @@ public class mobSaleController {
             Product.add(p.getPCode());
             Products.add(Product);
         }
-        saleOrder saleOrder = saleOrderRepository.findTopByOrderByOrderNoDesc();
-        Integer orderNo;
-        if (saleOrder == null) {
-            orderNo = Integer.valueOf(String.valueOf(1));
-            System.out.println(orderNo);
-        } else {
-            orderNo = Integer.valueOf(saleOrder.getOrderNo()) + 1;
+       saleOrder order=saleOrderRepository.findTopByOrderByOrderNoDesc();
+        int orderNo;
+        if(order==null){
+             orderNo = 1;
+        }else{
+            System.out.println("getOrdeNo:" +order.getOrderNo());
+            orderNo= order.getOrderNo()+1;
+            System.out.println("orderNo:" +  orderNo);
         }
         LocalDate date = LocalDate.parse(body.get("date").toString(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         body2.putIfAbsent("customers", Customers);
         body2.putIfAbsent("Products", Products);
         body2.putIfAbsent("orderNo", orderNo);
+
         return ResponseEntity.status(202).body(body2);
     }
 
     @PostMapping(value = "/saleOrderMob", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public ResponseEntity<Map> saveSales(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session) {
+    public ResponseEntity<Map> saleOrderMob(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session) {
         System.out.println("1111111111111111111111");
         System.out.println("body2:"+body);
         dailySales ds = new dailySales();
@@ -91,7 +93,7 @@ public class mobSaleController {
         dailySlaesRepository.save(ds);
 
         saleOrder so = new saleOrder();
-        so.setOrderNo(body.get("orderNo"));
+        so.setOrderNo(Integer.parseInt(body.get("orderNo")));
         so.setName(body.get("name"));
         so.setUnitRate(Double.parseDouble(body.get("unitRate")));
         so.setCustCode(body.get("custCode"));
@@ -133,13 +135,7 @@ public class mobSaleController {
         String date = body.get("date").toString();
         System.out.println("4444444444444444444444444444444");
         System.out.println("date:"+date);
-        // check date format n all
-        //orderno is not getting
-        // adhe date format check cheyyi
-        // am going out d
-        //one doubt for kalyan
-        //small it is from morning it is not getting
-        //pls connect to kalyan
+
        for(saleOrder order :saleOrderRepository.findByDate(body.get("date").toString())) {
 
 
@@ -154,10 +150,10 @@ public class mobSaleController {
     }
 
         @PostMapping(value = "/getSO", consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-        public ResponseEntity<Map> getPO(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session ){
+        public ResponseEntity<Map> getSO(@RequestBody Map<String, String> body, Model model, HttpServletRequest request, HttpSession session ){
           System.out.println("body4:"+body);
         String orderNo = body.get("orderNo");
-        if (orderNo.equals("null")) {
+        if (orderNo==null) {
             return ResponseEntity.status(202).body(new HashMap<>());
         }
         Map body2 = new HashMap();

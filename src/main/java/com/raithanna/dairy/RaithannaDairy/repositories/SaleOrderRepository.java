@@ -24,5 +24,6 @@ public interface SaleOrderRepository extends CrudRepository<saleOrder, Integer> 
 
     saleOrder findBycustCode(String custCode);
 
+
     // void findByCustCode(String custCode);
 }

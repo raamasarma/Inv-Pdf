@@ -9,4 +9,5 @@ import java.util.List;
 public interface MilktypeRepository extends CrudRepository<milktype,Integer> {
     @Query("select * from milktype where code=?1")
     milktype findByCode(String code);
+
 }

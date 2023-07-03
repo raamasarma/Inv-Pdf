@@ -70,6 +70,12 @@ public class purchaseOrderController {
    public ResponseEntity viewInvoice(@RequestParam(name = "invoiceNo", defaultValue = "1") String invoiceNo,@RequestParam(name = "orgCode", defaultValue = "1") String orgCode,HttpServletResponse response,HttpServletRequest request) {
        //List<purchaseOrder> po = purchaseOrderRepository.findByInvNo(invoiceNo);
        purchaseOrder po = purchaseOrderRepository.findByInvNo(invoiceNo);
+       String t=po.getInvNo().split("/")[0];
+       System.out.println("t:"+t);
+      List< purchaseOrder> po1 = purchaseOrderRepository.findByInvNoContaining(t);
+              System.out.println("Po:"+po1.size());
+     // purchaseOrder p1= purchaseOrderRepository.findByOrderNo(orderNo);
+       System.out.println("Po:"+po);
        // purchaseOrder oc = purchaseOrderRepository.findByOrgCode(orgCode);
        String date=po.getInvDate();
        String OrgCode= po.getOrgCode();
@@ -80,7 +86,7 @@ public class purchaseOrderController {
        String words = numtoWords.convert(ttlamt.toString().split("\\.")[0]);
        supplier sm= supplierRepository.findBySupplierCode(suplCode);
        System.out.println("sm:"+sm);
-       company cp= companyRepository.findByOrgCode(orgCode);
+       company cp=companyRepository.findByOrgCode(orgCode);
        System.out.println("cp:"+cp);
        WebContext context = new WebContext(request, response, request.getServletContext());
        System.out.println(cp.getOrgLogo());
@@ -88,7 +94,8 @@ public class purchaseOrderController {
        context.setVariable("banner", cp.getOrgBanner());
        context.setVariable("invoiceNo",invoiceNo);
        context.setVariable("po",po);
-       // context.setVariable("date",date);
+       context.setVariable("po1",po1);
+        context.setVariable("date",date);
        context.setVariable("sm",sm);
        context.setVariable("cp",cp);
        context.setVariable("words",words);
@@ -101,42 +108,44 @@ public class purchaseOrderController {
        renderer.finishPDF();
        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=supplier.pdf").contentType(MediaType.APPLICATION_OCTET_STREAM).body(ops.toByteArray());
    }
-    @PostMapping("/pdfDownload")
-    public String pdfDownload(@RequestParam Map<String, String> body, Model model, HttpServletResponse response, HttpServletRequest request) {
-        System.out.println(body);
-        System.out.println("invoiceNo:" + body.get("invoiceNo"));
-        String invNo = body.get("invoiceNo");
-        purchaseOrder po = purchaseOrderRepository.findByInvNo(invNo);
-        // create pdf logic
-        boolean flag = createPdfFile(po);
-        return "";
-
+    @GetMapping("/viewInvoice1")
+    public ResponseEntity viewInvoice1(@RequestParam(name = "invoiceNo", defaultValue = "1") String invoiceNo,@RequestParam(name = "orgCode", defaultValue = "1") String orgCode,HttpServletResponse response,HttpServletRequest request) {
+        //List<purchaseOrder> po = purchaseOrderRepository.findByInvNo(invoiceNo);
+        purchaseOrder po = purchaseOrderRepository.findByInvNo(invoiceNo);
+        // purchaseOrder p1= purchaseOrderRepository.findByOrderNo(orderNo);
+        System.out.println("Po:"+po);
+        // purchaseOrder oc = purchaseOrderRepository.findByOrgCode(orgCode);
+        String date=po.getInvDate();
+        String OrgCode= po.getOrgCode();
+        String suplCode =po.getSuplCode();
+        System.out.println(suplCode);
+        System.out.println(OrgCode);
+        Double ttlamt= po.getTotAmtRound();
+        String words = numtoWords.convert(ttlamt.toString().split("\\.")[0]);
+        supplier sm= supplierRepository.findBySupplierCode(suplCode);
+        System.out.println("sm:"+sm);
+        company cp=companyRepository.findByOrgCode(orgCode);
+        System.out.println("cp:"+cp);
+        WebContext context = new WebContext(request, response, request.getServletContext());
+        System.out.println(cp.getOrgLogo());
+        context.setVariable("logo", cp.getOrgLogo());
+        context.setVariable("banner", cp.getOrgBanner());
+        context.setVariable("invoiceNo",invoiceNo);
+        context.setVariable("po",po);
+        context.setVariable("date",date);
+        context.setVariable("sm",sm);
+        context.setVariable("cp",cp);
+        context.setVariable("words",words);
+        String finalhtml = springTemplateEngine.process("purchasepdf",context);
+        ByteArrayOutputStream ops = new ByteArrayOutputStream();
+        ITextRenderer renderer = new ITextRenderer();
+        renderer.setDocumentFromString(finalhtml);
+        renderer.layout();
+        renderer.createPDF(ops, false);
+        renderer.finishPDF();
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,"attachment; filename=supplier.pdf").contentType(MediaType.APPLICATION_OCTET_STREAM).body(ops.toByteArray());
     }
-    private boolean createPdfFile(purchaseOrder po)
-    {
-        try {
-            Document doc = new Document();
-            PdfWriter pdfWriter = null;
-            String path = "D:\\raam\\po.pdf";
-            pdfWriter = PdfWriter.getInstance(doc, new FileOutputStream(path));
-            // pdfWriter.setPageEvent((PdfPageEvent) new PDFEven
-            doc.addCreationDate();
-            doc.addProducer();
-            doc.addCreator("Application");
-            doc.addTitle("Invoice");
-            doc.setPageSize(PageSize.LETTER);
-            doc.open();
-            Paragraph p1 = new Paragraph("Invoice Number:"+po.getInvNo());
 
-            doc.add(p1);
-            doc.close();
-        }
-        catch(Exception e){
-
-        }
-
-        return true;
-    }
 
     @GetMapping("/purchaseExcelData")
     public String purchaseExcelOrderForm(Model model, HttpSession session) {
@@ -169,6 +178,8 @@ public class purchaseOrderController {
             System.out.println(supplierName.size());
             String format = String.format("%03d", supplierName.size() + 1);
             invNo =  purchaseList.get(0).getInvDate() + "-" + purchaseList.get(0).getSuplCode() + "-" + format + "/";
+           // String orderNo=purchaseList.get(0).getInvDate() + "-" + purchaseList.get(0).getSuplCode() + "-" + format;
+            //System.out.println(orderNo);
             int subOrder = 0;
             for (purchaseOrder list : purchaseList) {
                 subOrder = subOrder+1;
@@ -193,6 +204,7 @@ public class purchaseOrderController {
                 po.setSuplCode(list.getSuplCode());
                 po.setInvNo(invNo+subOrder);
                // po.setCode(list.getCode());
+               // po.setOrderNo(orderNo);
                 po.setInvType(list.getInvType());
                 po.setTmode(list.getTmode());
                 po.setUnit(list.getUnit());

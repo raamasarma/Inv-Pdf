@@ -153,8 +153,8 @@ table td { border: 3px solid black }
 
     <br>
     <div class="box-footer">
-      <button id="submit" class="btn btn-primary">Submit</button>
-<!--      <button id="print"  class="btn btn-primary">Print</button>-->
+      <button id="submit1" class="btn btn-primary">Submit</button>
+      <button id="submit2" class="btn btn-primary">Print</button>
 
     </div>
 
@@ -177,6 +177,7 @@ table td { border: 3px solid black }
             <th scope="col">Amount </th>
             <th scope="col">Pay Status</th>
             <th scope="col">org Code</th>
+<!--            <th scope="col">order NO</th>-->
             <th scope="col">Action</th>
           </tr>
           </thead>
@@ -195,14 +196,14 @@ table td { border: 3px solid black }
             <td scope="col"><span th:text="${lists.amt}"></span></td>
             <td scope="col"><span th:text="${lists.paymentStatus}"></span></td>
             <td scope="col"><span th:text="${lists.orgCode}"></span></td>
-<!--            <td class="anchor_cell"><a href=th:text="${lists.invNo}>print</a></td>-->
-<!--            <td><a href="<span th:text="${lists.invNo}"></span>">print</a></td>-->
+
             <td><a href="#" class="href">print invoice</a></td>
           </tr>
           <tbody>
         </table>
       </div>
     </div>
+
   </form>
 
 </div>
@@ -211,7 +212,7 @@ table td { border: 3px solid black }
 $(document).ready(function() {
 <!--$("#hide").hide();-->
 });
-$('#submit').click(function() {
+$('#submit1').click(function() {
 var supplierName=$("#supplierName").val();
 //alert(supplierName);
 var fromDate = $("#fromDate").val();
@@ -242,10 +243,11 @@ window.location.replace ("/purchaseExcel");
 }
 });
 });
+});
 </script>
 <script>
   $("#purchaseTable tr td a.href").click(function(){
- // alert("in");
+  //alert("in");
   var invoiceCode = $(this).parent().parent().find('td:nth-child(2)').text();
   alert(invoiceCode);
   alert("/purchasePdfData?invoiceNo="+invoiceCode);
@@ -253,36 +255,33 @@ window.location.replace ("/purchaseExcel");
   alert(orgCode);
   window.location.href = "/viewInvoice?invoiceNo="+ invoiceCode+"&orgCode="+orgCode;
   });
+  $('#submit2').click(function() {
+   alert("in");
+<!-- window.location.href = "/viewInvoice?invoiceNo="+ invoiceCode+"&orgCode="+orgCode;-->
+
+   $('#purchaseTable tbody tr').each(function(index) {
+   var currentRow=$(this).closest("tr");
+
+ var invNo = $(this).find("td").eq(1).text();
+ alert(invNo);
+ var orgCode = $(this).find("td").eq(12).text();
+  alert(orgCode);
+//window.location.href = "/viewInvoice1?invoiceNo="+ invNo+"&orgCode="+orgCode;
+ $.ajax({
+ type: 'GET',
+url: '/viewInvoice1',
+        data: {
+        "invoiceNo":invNo,
+         "orgCode": orgCode
+         },
+          success: function(data) {
+          window.location.replace ("/purchaseExcel");
+}
+});
+});
+
+   });
+
 </script>
-<!--<script>-->
-<!--   $("#print").click(function() {-->
-<!--  // alert("in");-->
-<!--   var invoiceCode,orgCode;-->
-<!--    $("table trtd a.href").each(function(index) {-->
-<!--    var currentRow=$(this).closest("tr");-->
-<!--       invoiceNo = currentRow.find("td:eq(1)").text();;-->
-<!--      // alert(invoiceCode);-->
-<!--&lt;!&ndash;       alert("/purchasePdfData?invoiceNo="+invoiceCode);&ndash;&gt;-->
-<!--     var orgCode = $(this).parent().parent().find('td:nth-child(13)').text();-->
-<!--     //alert(orgCode);-->
 
-<!--       $.ajax({-->
-<!--&lt;!&ndash;'async': false,&ndash;&gt;-->
-<!-- type: 'POST',-->
-<!--url: '/viewInvoice',-->
-<!--        data: {-->
-<!--                "invoiceNo":invoiceNo,-->
-<!--                "orgCode ": orgCode ,-->
-
-<!--            },-->
-<!--            success: function(data) {-->
-<!--   //alert("Order Not Exists");-->
-<!--//alert("Data Saved Successfully !!!");-->
-<!--&lt;!&ndash;window.location.replace ("/purchaseExcel");&ndash;&gt;-->
-<!--window.location.href = "/viewInvoice?invoiceNo="+ invoiceNo;+"&orgCode="+orgCode;-->
-<!--}-->
-<!--});-->
-<!--  });-->
-<!--       });-->
-<!--</script>-->
 </html>
