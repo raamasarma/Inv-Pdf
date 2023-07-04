@@ -72,6 +72,7 @@ public class purchaseOrderController {
        purchaseOrder po = purchaseOrderRepository.findByInvNo(invoiceNo);
        String t=po.getInvNo().split("/")[0];
        System.out.println("t:"+t);
+       System.out.println("Hello World");
       List< purchaseOrder> po1 = purchaseOrderRepository.findByInvNoContaining(t);
               System.out.println("Po:"+po1.size());
      // purchaseOrder p1= purchaseOrderRepository.findByOrderNo(orderNo);
